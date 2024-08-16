@@ -5,15 +5,15 @@ class HomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      child: SizedBox.expand(
-        child: Center(
+    return Scaffold(
+        appBar: AppBar(
+          title: Text('Home'),
+        ),
+        body: const Center(
           child: Text(
             "Home Page initial",
             style: TextStyle(fontSize: 30),
           ),
-        ),
-      ),
-    );
+        ));
   }
 }
