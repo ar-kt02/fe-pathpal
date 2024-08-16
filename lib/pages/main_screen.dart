@@ -1,4 +1,5 @@
 import 'package:fe_pathpal/pages/home_page.dart';
+import 'package:fe_pathpal/pages/stats_page.dart';
 import 'package:flutter/material.dart';
 
 class MainScreen extends StatefulWidget {
@@ -24,35 +25,23 @@ class _MainScreenState extends State<MainScreen> {
         selectedIndex: currentPage,
         destinations: const <Widget>[
           NavigationDestination(
-            selectedIcon: Icon(
-              Icons.pets,
-            ),
-            icon: Icon(
-              Icons.pets_outlined,
-            ),
+            selectedIcon: Icon(Icons.pets),
+            icon: Icon(Icons.pets_outlined),
             label: 'Home',
           ),
           NavigationDestination(
-            selectedIcon: Icon(
-              Icons.query_stats,
-            ),
-            icon: Icon(
-              Icons.query_stats_outlined,
-            ),
+            selectedIcon: Icon(Icons.query_stats),
+            icon: Icon(Icons.query_stats_outlined),
             label: 'Stats',
           ),
           NavigationDestination(
-            selectedIcon: Icon(
-              Icons.manage_accounts,
-            ),
-            icon: Icon(
-              Icons.manage_accounts_outlined,
-            ),
+            selectedIcon: Icon(Icons.manage_accounts),
+            icon: Icon(Icons.manage_accounts_outlined),
             label: 'Settings',
           )
         ],
       ),
-      body: <Widget>[const HomePage()][currentPage],
+      body: <Widget>[const HomePage(), const StatsPage()][currentPage],
     );
   }
 }
