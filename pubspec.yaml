@@ -8,10 +8,12 @@ environment:
 
 dependencies:
    convert: ^3.1.1
+   curved_navigation_bar: ^1.0.6
    flutter:
       sdk: flutter
    http: ^1.2.2
    pedometer: ^4.0.2
+   shared_preferences: ^2.3.2
 
 dev_dependencies:
    flutter_test:
