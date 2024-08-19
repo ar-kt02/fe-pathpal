@@ -1,6 +1,6 @@
 {
-    "name": "fe_pathpal",
-    "short_name": "fe_pathpal",
+    "name": "pathpal",
+    "short_name": "pathpal",
     "start_url": ".",
     "display": "standalone",
     "background_color": "#0175C2",

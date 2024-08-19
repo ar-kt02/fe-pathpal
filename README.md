@@ -1,3 +1,3 @@
-# fe_pathpal
+# pathpal
 
 A new Flutter project.

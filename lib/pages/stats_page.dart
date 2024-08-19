@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:pedometer/pedometer.dart';
+// import 'package:pedometer/pedometer.dart';
 
 class StatsPage extends StatelessWidget {
   const StatsPage({super.key});

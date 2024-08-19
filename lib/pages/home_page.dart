@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_3d_controller/flutter_3d_controller.dart';
+import 'package:model_viewer_plus/model_viewer_plus.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
@@ -7,42 +7,49 @@ class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(
-          title: const Text('Home'),
-        ),
-        body: const Center(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.start,
-            children: <Widget>[
-              Card(
-                  child: SizedBox(
-                      height: 50,
-                      child: Center(
-                        child: Text("Pet Name: test | Level: 500, Steps: 5255",
-                            style: TextStyle(fontSize: 20)),
-                      ))),
-              Card(
-                child: SizedBox(
-                  height: 500,
-                  child: Flutter3DViewer(
-                    src: 'assets/shiba.glb',
-                    progressBarColor: Colors.amber,
+      appBar:
+          AppBar(title: const Text('Home'), backgroundColor: Color(0xFFFF9E6E)),
+      body: const SingleChildScrollView(
+        child: Column(
+          children: <Widget>[
+            SizedBox(
+              height: 60,
+              child: Center(
+                child: Text(
+                  "Name: Dag | Level: 500 | Steps: 5255",
+                  style: TextStyle(fontSize: 18),
+                ),
+              ),
+            ),
+            Card(
+              child: SizedBox(
+                height: 420,
+                child: ModelViewer(
+                  src: 'assets/shiba.glb',
+                  alt: 'Shiba Inu model',
+                  ar: true,
+                  arModes: ['scene-viewer', 'webxr', 'quick-look'],
+                  autoRotate: true,
+                  disableZoom: true,
+                  cameraControls: true,
+                  iosSrc: 'assets/shiba.usdz',
+                ),
+              ),
+            ),
+            Card(
+              child: SizedBox(
+                height: 110,
+                child: Center(
+                  child: Text(
+                    "Accessories",
+                    style: TextStyle(fontSize: 20),
                   ),
                 ),
               ),
-              Card(
-                child: SizedBox(
-                  height: 110,
-                  child: Center(
-                    child: Text(
-                      "Accesories",
-                      style: TextStyle(fontSize: 20),
-                    ),
-                  ),
-                ),
-              )
-            ],
-          ),
-        ));
+            ),
+          ],
+        ),
+      ),
+    );
   }
 }

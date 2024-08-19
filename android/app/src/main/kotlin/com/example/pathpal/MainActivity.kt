@@ -1,4 +1,4 @@
-package com.example.fe_pathpal
+package com.example.pathpal
 
 import io.flutter.embedding.android.FlutterActivity
 

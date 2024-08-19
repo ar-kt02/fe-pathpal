@@ -1,5 +1,5 @@
-import 'package:fe_pathpal/pages/home_page.dart';
-import 'package:fe_pathpal/pages/stats_page.dart';
+import 'home_page.dart';
+import 'stats_page.dart';
 import 'package:flutter/material.dart';
 
 class MainScreen extends StatefulWidget {
