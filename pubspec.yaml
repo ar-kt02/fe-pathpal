@@ -7,11 +7,14 @@ environment:
    sdk: ^3.5.0
 
 dependencies:
+   convert: ^3.1.1
+   fl_chart: ^0.68.0
    flutter:
       sdk: flutter
+   http: ^1.2.2
    model_viewer_plus: ^1.8.0
-   moon_design: ^1.0.3
    pedometer: ^4.0.2
+   syncfusion_flutter_gauges: ^26.2.10
    url_launcher: ^6.1.5
 
 dev_dependencies:
