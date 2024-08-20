@@ -1,5 +1,6 @@
 import 'home_page.dart';
 import 'stats_page.dart';
+import 'settings_page.dart';
 import 'package:flutter/material.dart';
 
 class MainScreen extends StatefulWidget {
@@ -41,7 +42,11 @@ class _MainScreenState extends State<MainScreen> {
           )
         ],
       ),
-      body: <Widget>[const HomePage(), const StatsPage()][currentPage],
+      body: <Widget>[
+        const HomePage(),
+        const StatsPage(),
+        const SettingsPage()
+      ][currentPage],
     );
   }
 }
