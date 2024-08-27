@@ -56,25 +56,67 @@ class _LoginPageState extends State<LoginPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-          title: const Text('Log in'),
-          backgroundColor: const Color(0xFFFF9E6E)),
-      body: Container(
-        padding: const EdgeInsets.all(15.0),
+        title: const Text('Log in',
+            style: TextStyle(
+              fontSize: 22,
+              fontWeight: FontWeight.bold,
+              color: Colors.black87,
+            )),
+        backgroundColor: const Color.fromARGB(255, 101, 111, 255),
+        centerTitle: true,
+        elevation: 4.0,
+      ),
+      body: Padding(
+        padding: const EdgeInsets.all(16.0),
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.start,
+          mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            TextField(
-              controller: _emailController,
-              decoration: const InputDecoration(
-                  labelText: 'Enter your email', border: OutlineInputBorder()),
-            ),
-            Padding(
-              padding: const EdgeInsets.only(top: 10),
-              child: OutlinedButton(
-                onPressed: _loginUser,
-                child: const Text('Log in'),
+            Text(
+              'Welcome Back!',
+              style: TextStyle(
+                fontSize: 28,
+                fontWeight: FontWeight.bold,
+                color: Colors.black87,
               ),
             ),
+            const SizedBox(height: 20),
+            TextField(
+              controller: _emailController,
+              decoration: InputDecoration(
+                labelText: 'Enter your email',
+                labelStyle: TextStyle(color: Colors.blueGrey),
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(12.0),
+                ),
+                focusedBorder: OutlineInputBorder(
+                  borderSide: BorderSide(color: Colors.blueAccent),
+                  borderRadius: BorderRadius.circular(12.0),
+                ),
+              ),
+              keyboardType: TextInputType.emailAddress,
+            ),
+            const SizedBox(height: 20),
+            SizedBox(
+              width: double.infinity,
+              child: ElevatedButton(
+                onPressed: _loginUser,
+                style: ElevatedButton.styleFrom(
+                  padding: const EdgeInsets.symmetric(vertical: 14.0),
+                  backgroundColor: const Color.fromARGB(255, 101, 111, 255),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(12.0),
+                  ),
+                ),
+                child: const Text(
+                  'Log in',
+                  style: TextStyle(
+                    fontSize: 18,
+                    color: Colors.black87,
+                  ),
+                ),
+              ),
+            ),
+            const SizedBox(height: 10),
           ],
         ),
       ),

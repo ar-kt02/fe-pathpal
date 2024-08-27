@@ -43,24 +43,47 @@ class StatsPageState extends State<StatsPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Stats"),
-        backgroundColor: const Color(0xFFFF9E6E),
+        title: const Text("Stats",
+            style: TextStyle(
+              fontSize: 22,
+              fontWeight: FontWeight.bold,
+              color: Colors.black87,
+            )),
+        backgroundColor: const Color.fromARGB(255, 101, 111, 255),
+        centerTitle: true,
+        elevation: 4.0,
       ),
-      body: Center(
-        child: _isLoading
-            ? const CircularProgressIndicator()
-            : Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Text(
-                    'Total Steps:\n $_totalSteps',
-                    textAlign: TextAlign.center,
-                    style: const TextStyle(fontSize: 25),
-                  ),
-                  const SizedBox(height: 20),
-                  GaugeTracker(todaySteps: _todaySteps),
-                ],
-              ),
+      body: Padding(
+        padding: const EdgeInsets.all(16.0),
+        child: Center(
+          child: _isLoading
+              ? const CircularProgressIndicator()
+              : Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text(
+                      'Total Steps:',
+                      style: TextStyle(
+                        fontSize: 28,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.black87,
+                      ),
+                    ),
+                    const SizedBox(height: 10),
+                    Text(
+                      '$_totalSteps',
+                      textAlign: TextAlign.center,
+                      style: TextStyle(
+                        fontSize: 36,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.blueGrey,
+                      ),
+                    ),
+                    const SizedBox(height: 30),
+                    GaugeTracker(todaySteps: _todaySteps),
+                  ],
+                ),
+        ),
       ),
     );
   }

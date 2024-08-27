@@ -5,6 +5,7 @@ import '../utils/api_service.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
+
   @override
   _HomePageState createState() => _HomePageState();
 }
@@ -17,7 +18,6 @@ class _HomePageState extends State<HomePage> {
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     _fetchUserInfo();
   }
@@ -31,8 +31,8 @@ class _HomePageState extends State<HomePage> {
       if (userInfo != null) {
         setState(() {
           _name = userInfo['pet_details']['pet_name'] ?? "loading";
-          _level = userInfo['level'] ?? "loading";
-          _xp = userInfo['xp'] ?? "loading";
+          _level = userInfo['level'] ?? 0;
+          _xp = userInfo['xp'] ?? 0;
         });
       }
     }
@@ -42,46 +42,79 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-          title: const Text('Home'), backgroundColor: const Color(0xFFFF9E6E)),
+        title: const Text(
+          'Home',
+          style: TextStyle(
+            fontSize: 22,
+            fontWeight: FontWeight.bold,
+            color: Colors.black87,
+          ),
+        ),
+        backgroundColor: const Color.fromARGB(255, 101, 111, 255),
+        centerTitle: true,
+        elevation: 4.0,
+      ),
       body: SingleChildScrollView(
-        child: Column(
-          children: <Widget>[
-            SizedBox(
-              height: 60,
-              child: Center(
-                child: Text(
-                  'Name: $_name | Level: $_level | XP: $_xp',
-                  style: TextStyle(fontSize: 18),
-                ),
-              ),
-            ),
-            Card(
-              child: SizedBox(
-                height: 420,
-                child: ModelViewer(
-                  src: 'assets/shiba.glb',
-                  alt: 'Shiba Inu model',
-                  ar: true,
-                  arModes: ['scene-viewer', 'webxr', 'quick-look'],
-                  // autoRotate: true,
-                  disableZoom: true,
-                  // cameraControls: true,
-                  iosSrc: 'assets/shiba.usdz',
-                ),
-              ),
-            ),
-            Card(
-              child: SizedBox(
-                height: 110,
+        child: Padding(
+          padding: const EdgeInsets.all(16.0),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: <Widget>[
+              SizedBox(
+                height: 60,
                 child: Center(
                   child: Text(
-                    "Accessories",
-                    style: TextStyle(fontSize: 20),
+                    'Name: $_name | Level: $_level | XP: $_xp',
+                    style: TextStyle(
+                      fontSize: 18,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.black87,
+                    ),
                   ),
                 ),
               ),
-            ),
-          ],
+              const SizedBox(height: 20),
+              Card(
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(16.0),
+                ),
+                child: SizedBox(
+                  height: 420,
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.circular(16.0),
+                    child: ModelViewer(
+                      src: 'assets/shiba.glb',
+                      alt: 'Shiba Inu model',
+                      ar: true,
+                      arModes: ['scene-viewer', 'webxr', 'quick-look'],
+                      disableZoom: true,
+                      iosSrc: 'assets/shiba.usdz',
+                    ),
+                  ),
+                ),
+              ),
+              const SizedBox(height: 20),
+              Card(
+                elevation: 8.0,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(16.0),
+                ),
+                child: SizedBox(
+                  height: 110,
+                  child: Center(
+                    child: Text(
+                      "Accessories",
+                      style: TextStyle(
+                        fontSize: 20,
+                        fontWeight: FontWeight.w600,
+                        color: Colors.blueGrey,
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+            ],
+          ),
         ),
       ),
     );
