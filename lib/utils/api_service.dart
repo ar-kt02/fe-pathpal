@@ -1,4 +1,5 @@
 import 'package:dio/dio.dart';
+
 class ApiService {
   final Dio _dio = Dio();
   ApiService() {
@@ -13,6 +14,7 @@ class ApiService {
       return false;
     }
   }
+
   Future<Map<String, dynamic>?> fetchUserInfo(String email) async {
     try {
       final response = await _dio.get('/users/$email/');
@@ -24,6 +26,7 @@ class ApiService {
     }
     return null;
   }
+
   Future<void> patchUserSteps(
       String email, int todaySteps, int totalSteps) async {
     try {
@@ -37,6 +40,7 @@ class ApiService {
       return;
     }
   }
+
   Future<void> patchUserXp(String email, int xpIncrease) async {
     try {
       await _dio.patch('/users/$email/', data: {'xp': xpIncrease});
@@ -44,13 +48,16 @@ class ApiService {
       return;
     }
   }
+
+  Future<void> patchSelectedToy(String email, String toyKey) async {
+    try {
+      await _dio.patch('/users/$email/', data: {
+        'pet_details': {
+          'selected_toy': toyKey,
+        },
+      });
+    } catch (e) {
+      return;
+    }
+  }
 }
-
-
-
-
-
-
-
-
-

@@ -53,8 +53,8 @@ class StepTracker {
   }
 
   void _runPedometer() {
-    pedometerSubcription = Pedometer.stepCountStream.listen((stepCount) {
-      _updateSteps(stepCount.steps);
+    pedometerSubcription = Pedometer.stepCountStream.listen((StepCount event) {
+      _updateSteps(event.steps);
     });
   }
 
