@@ -1,9 +1,6 @@
-import 'dart:async';
-
 import 'package:flutter/material.dart';
-import 'package:pedometer/pedometer.dart';
-import 'package:shared_preferences/shared_preferences.dart';
-import '../utils/api_service.dart';
+import '../utils/step_tracker.dart';
+import '../widgets/gauge_tracker.dart';
 
 class StatsPage extends StatefulWidget {
   const StatsPage({super.key});
@@ -13,74 +10,57 @@ class StatsPage extends StatefulWidget {
 }
 
 class StatsPageState extends State<StatsPage> {
-  int _stepsCount = 0;
+  late StepTracker _stepTracker;
+  int _todaySteps = 0;
   int _totalSteps = 0;
-  late String _email;
-  Timer? _patchTimer;
+  bool _isLoading = true;
 
   @override
   void initState() {
     super.initState();
-    _accessEmail();
-    _runPedometer();
-    setUpTimedPatch();
-  }
-
-  Future<void> _accessEmail() async {
-    final prefs = await SharedPreferences.getInstance();
-    setState(() {
-      _email = prefs.getString("email") ?? "";
-    });
-    if (_email.isNotEmpty) {
-      await _fetchUserInfo();
-    }
-  }
-
-  Future<void> _fetchUserInfo() async {
-    if (_email.isNotEmpty) {
-      final apiService = ApiService();
-      final userInfo = await apiService.fetchUserInfo(_email);
-      if (userInfo != null) {
-        setState(() {
-          _totalSteps = userInfo["step_details"]?["total_steps"];
-        });
-      }
-    }
-  }
-
-  void setUpTimedPatch() {
-    _patchTimer =
-        Timer.periodic(const Duration(hours: 1), (_) => _hourlyPatchSteps());
-  }
-
-  Future<void> _hourlyPatchSteps() async {
-    if (_email.isNotEmpty) {
-      final apiService = ApiService();
-      await apiService.patchTodaySteps(_email, _stepsCount);
-    }
-  }
-
-  void _runPedometer() {
-    Pedometer.stepCountStream.listen((stepCount) {
+    _stepTracker = StepTracker(stepsUpdateHandler: _stepsUpdateHandler);
+    _stepTracker.initialiseData().then((_) {
       setState(() {
-        _stepsCount = stepCount.steps;
+        _isLoading = false;
       });
     });
   }
 
   @override
   void dispose() {
-    _patchTimer?.cancel();
+    _stepTracker.dispose();
     super.dispose();
+  }
+
+  void _stepsUpdateHandler(int todaySteps, int totalSteps) {
+    setState(() {
+      _todaySteps = todaySteps;
+      _totalSteps = totalSteps;
+    });
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-          title: const Text("Stats"), backgroundColor: const Color(0xFFFF9E6E)),
+        title: const Text("Stats"),
+        backgroundColor: const Color(0xFFFF9E6E),
+      ),
       body: Center(
-        child: Text('Todays Steps: $_stepsCount, Total Steps: $_totalSteps'),
+        child: _isLoading
+            ? const CircularProgressIndicator()
+            : Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text(
+                    'Total Steps:\n $_totalSteps',
+                    textAlign: TextAlign.center,
+                    style: const TextStyle(fontSize: 25),
+                  ),
+                  const SizedBox(height: 20),
+                  GaugeTracker(todaySteps: _todaySteps),
+                ],
+              ),
       ),
     );
   }

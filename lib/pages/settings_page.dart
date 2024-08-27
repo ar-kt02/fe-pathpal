@@ -8,6 +8,7 @@ class SettingsPage extends StatelessWidget {
   Future<void> _logoutUser(BuildContext context) async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     await prefs.remove('email');
+    await prefs.remove('lastPedometerCountLocal');
 
     Navigator.pushReplacement(
       context,
