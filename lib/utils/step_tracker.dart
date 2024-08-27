@@ -8,6 +8,7 @@ class StepTracker {
   int totalSteps = 0;
   int stepsToTriggerPatch = 0;
   int lastPedometerCount = 0;
+  int currentXp = 0;
   String email = "";
   StreamSubscription<StepCount>? pedometerSubcription;
 
@@ -36,6 +37,7 @@ class StepTracker {
         totalSteps = userInfo['step_details']['total_steps'] ?? 0;
         lastPedometerCount =
             prefs.getInt('lastPedometerCountLocal') ?? todaySteps;
+        currentXp = userInfo['xp'];
 
         await _updateLocalData();
         stepsUpdateHandler(todaySteps, totalSteps);
@@ -73,7 +75,8 @@ class StepTracker {
       await _updateLocalData();
       stepsUpdateHandler(todaySteps, totalSteps);
 
-      if (stepsToTriggerPatch >= 50) {
+      if (stepsToTriggerPatch >= 10) {
+        await _patchUserXp(stepIncrease);
         await _patchUserSteps();
         stepsToTriggerPatch = 0;
       }
@@ -83,6 +86,16 @@ class StepTracker {
   Future<void> _updateLocalData() async {
     final prefs = await SharedPreferences.getInstance();
     await prefs.setInt('lastPedometerCountLocal', lastPedometerCount);
+  }
+
+  Future<void> _patchUserXp(int stepIncrease) async {
+    try {
+      final apiService = ApiService();
+      int xpIncrease = currentXp + (stepIncrease ~/ 10);
+      await apiService.patchUserXp(email, xpIncrease);
+    } catch (e) {
+      return;
+    }
   }
 
   Future<void> _patchUserSteps() async {
