@@ -145,9 +145,9 @@ class _HomePageState extends State<HomePage> {
               ),
             ),
             Padding(
-              padding: const EdgeInsets.all(8.0), // Added padding around the list
+              padding: const EdgeInsets.all(8.0), 
               child: SizedBox(
-                height: 120, // Adjusted height to fit the available space
+                height: 120,
                 child: ListView(
                   scrollDirection: Axis.horizontal,
                   children: _handleToySelection(),
@@ -168,8 +168,8 @@ class _HomePageState extends State<HomePage> {
       String formattedKey = entries.key.replaceAll('_', ' ');
 
       return Container(
-        width: 100, // Adjusted width to fit within screen space
-        padding: const EdgeInsets.all(8.0), // Added padding for spacing
+        width: 100, 
+        padding: const EdgeInsets.all(8.0), 
         child: Column(
           children: [
             GestureDetector(
@@ -197,7 +197,7 @@ class _HomePageState extends State<HomePage> {
             Expanded(
               child: Center(
                 child: FittedBox(
-                  fit: BoxFit.scaleDown, // Scales down the text to fit
+                  fit: BoxFit.scaleDown, 
                   child: Text(
                     formattedKey,
                     style: const TextStyle(fontSize: 15),

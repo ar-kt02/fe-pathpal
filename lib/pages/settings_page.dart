@@ -22,7 +22,7 @@ class SettingsPage extends StatelessWidget {
       appBar: AppBar(
         title: const Text('Settings'),
         backgroundColor: const Color(0xFFFF9E6E),
-        centerTitle: true,  // Center the title
+        centerTitle: true,  
       ),
       body: Center(
         child: Padding(
