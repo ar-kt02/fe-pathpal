@@ -71,16 +71,61 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-          title: const Text('Home'), backgroundColor: const Color(0xFFFF9E6E)),
+        title: const Text('Home'),
+        backgroundColor: const Color(0xFFFF9E6E),
+        centerTitle: true,
+      ),
       body: SingleChildScrollView(
         child: Column(
           children: <Widget>[
             SizedBox(
               height: 60,
               child: Center(
-                child: Text(
-                  'Name: $_name | Level: $_level | XP: $_xp',
-                  style: const TextStyle(fontSize: 18),
+                child: Text.rich(
+                  TextSpan(
+                    children: [
+                      TextSpan(
+                        text: 'Name: ',
+                        style: const TextStyle(
+                          fontWeight: FontWeight.bold,
+                          fontSize: 18,
+                        ),
+                      ),
+                      TextSpan(
+                        text: _name,
+                        style: const TextStyle(
+                          fontSize: 18,
+                        ),
+                      ),
+                      TextSpan(
+                        text: ' | Level: ',
+                        style: const TextStyle(
+                          fontWeight: FontWeight.bold,
+                          fontSize: 18,
+                        ),
+                      ),
+                      TextSpan(
+                        text: _level.toString(),
+                        style: const TextStyle(
+                          fontSize: 18,
+                        ),
+                      ),
+                      TextSpan(
+                        text: ' | XP: ',
+                        style: const TextStyle(
+                          fontWeight: FontWeight.bold,
+                          fontSize: 18,
+                        ),
+                      ),
+                      TextSpan(
+                        text: _xp.toString(),
+                        style: const TextStyle(
+                          fontSize: 18,
+                        ),
+                      ),
+                    ],
+                  ),
+                  textAlign: TextAlign.center,
                 ),
               ),
             ),
@@ -99,9 +144,10 @@ class _HomePageState extends State<HomePage> {
                 ),
               ),
             ),
-            Card(
+            Padding(
+              padding: const EdgeInsets.all(8.0), 
               child: SizedBox(
-                height: 105,
+                height: 120,
                 child: ListView(
                   scrollDirection: Axis.horizontal,
                   children: _handleToySelection(),
@@ -121,37 +167,47 @@ class _HomePageState extends State<HomePage> {
       bool isSelected = _selectedToy == entries.value;
       String formattedKey = entries.key.replaceAll('_', ' ');
 
-      return Column(
-        children: [
-          GestureDetector(
-            onTap: () async {
-              await _changeToyTap(entries.key);
-            },
-            child: Card(
-              color: isSelected ? Colors.amber.shade300 : Colors.transparent,
-              child: SizedBox(
-                width: 90,
+      return Container(
+        width: 100, 
+        padding: const EdgeInsets.all(8.0), 
+        child: Column(
+          children: [
+            GestureDetector(
+              onTap: () async {
+                await _changeToyTap(entries.key);
+              },
+              child: Card(
+                color: isSelected ? Colors.amber.shade300 : Colors.transparent,
                 child: SizedBox(
                   height: 75,
                   child: IgnorePointer(
-                      ignoring: true,
-                      child: ModelViewer(
-                        src: entries.value,
-                        alt: entries.key,
-                        ar: false,
-                        autoRotate: false,
-                        disableZoom: true,
-                        cameraControls: false,
-                      )),
+                    ignoring: true,
+                    child: ModelViewer(
+                      src: entries.value,
+                      alt: entries.key,
+                      ar: false,
+                      autoRotate: false,
+                      disableZoom: true,
+                      cameraControls: false,
+                    ),
+                  ),
                 ),
               ),
             ),
-          ),
-          Text(
-            formattedKey,
-            style: const TextStyle(fontSize: 15),
-          ),
-        ],
+            Expanded(
+              child: Center(
+                child: FittedBox(
+                  fit: BoxFit.scaleDown, 
+                  child: Text(
+                    formattedKey,
+                    style: const TextStyle(fontSize: 15),
+                    textAlign: TextAlign.center,
+                  ),
+                ),
+              ),
+            ),
+          ],
+        ),
       );
     }).toList();
   }

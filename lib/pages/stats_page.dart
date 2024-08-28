@@ -43,7 +43,13 @@ class StatsPageState extends State<StatsPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Stats"),
+        centerTitle: true,
+        title: const Text(
+          "Stats",
+          style: TextStyle(
+            fontSize: 24,
+          ),
+        ),
         backgroundColor: const Color(0xFFFF9E6E),
       ),
       body: Center(
@@ -55,7 +61,10 @@ class StatsPageState extends State<StatsPage> {
                   Text(
                     'Total Steps:\n $_totalSteps',
                     textAlign: TextAlign.center,
-                    style: const TextStyle(fontSize: 25),
+                    style: const TextStyle(
+                      fontSize: 25,
+                      fontWeight: FontWeight.bold,
+                    ),
                   ),
                   const SizedBox(height: 20),
                   GaugeTracker(todaySteps: _todaySteps),
