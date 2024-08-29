@@ -18,7 +18,10 @@ class StatsPageState extends State<StatsPage> {
   @override
   void initState() {
     super.initState();
-    _stepTracker = StepTracker(stepsUpdateHandler: _stepsUpdateHandler);
+    _stepTracker = StepTracker(
+      stepsUpdateHandler: _stepsUpdateHandler,
+      context: context,
+    );
     _stepTracker.initialiseData().then((_) {
       setState(() {
         _isLoading = false;
@@ -43,7 +46,7 @@ class StatsPageState extends State<StatsPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Container(
-        decoration: BoxDecoration(
+        decoration: const BoxDecoration(
           gradient: LinearGradient(
             colors: [
               Color(0xFF00C9FF),
