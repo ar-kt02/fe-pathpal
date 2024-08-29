@@ -42,34 +42,37 @@ class StatsPageState extends State<StatsPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        centerTitle: true,
-        title: const Text(
-          "Stats",
-          style: TextStyle(
-            fontSize: 24,
+      body: Container(
+        decoration: BoxDecoration(
+          gradient: LinearGradient(
+            colors: [
+              Color(0xFF00C9FF),
+              Color(0xFF92FE9D),
+            ],
+            begin: Alignment.topCenter,
+            end: Alignment.bottomCenter,
           ),
         ),
-        backgroundColor: const Color(0xFFFF9E6E),
-      ),
-      body: Center(
-        child: _isLoading
-            ? const CircularProgressIndicator()
-            : Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Text(
-                    'Total Steps:\n $_totalSteps',
-                    textAlign: TextAlign.center,
-                    style: const TextStyle(
-                      fontSize: 25,
-                      fontWeight: FontWeight.bold,
+        child: Center(
+          child: _isLoading
+              ? const CircularProgressIndicator()
+              : Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text(
+                      'Total Steps:\n $_totalSteps',
+                      textAlign: TextAlign.center,
+                      style: const TextStyle(
+                        fontSize: 25,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.white,
+                      ),
                     ),
-                  ),
-                  const SizedBox(height: 20),
-                  GaugeTracker(todaySteps: _todaySteps),
-                ],
-              ),
+                    const SizedBox(height: 20),
+                    GaugeTracker(todaySteps: _todaySteps),
+                  ],
+                ),
+        ),
       ),
     );
   }
