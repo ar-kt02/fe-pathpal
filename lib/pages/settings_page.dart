@@ -8,7 +8,12 @@ class SettingsPage extends StatelessWidget {
   Future<void> _logoutUser(BuildContext context) async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     await prefs.remove('email');
-    await prefs.remove('lastPedometerCountLocal');
+    await prefs.remove('todaySteps');
+    await prefs.remove('totalSteps');
+    await prefs.remove('lastPedometerCount');
+    await prefs.remove('currentXp');
+    await prefs.remove('currentLevel');
+    await prefs.remove('lastUpdateTime');
 
     Navigator.pushReplacement(
       context,
@@ -20,7 +25,7 @@ class SettingsPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Container(
-        decoration: BoxDecoration(
+        decoration: const BoxDecoration(
           gradient: LinearGradient(
             colors: [
               Color(0xFF00C9FF),
