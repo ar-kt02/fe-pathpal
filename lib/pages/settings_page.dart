@@ -19,7 +19,6 @@ class SettingsPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      // Removed the AppBar
       body: Container(
         decoration: BoxDecoration(
           gradient: LinearGradient(

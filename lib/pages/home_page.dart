@@ -163,7 +163,10 @@ class _HomePageState extends State<HomePage> {
                   },
                   child: Text(
                     'Change Toy',
-                    style: TextStyle(fontSize: 18, color: Colors.white, t),
+                    style: TextStyle(
+                      fontSize: 18,
+                      color: Colors.white,
+                    ),
                   ),
                 ),
               ),
