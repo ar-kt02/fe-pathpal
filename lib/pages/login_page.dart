@@ -62,7 +62,7 @@ class _LoginPageState extends State<LoginPage> {
         fit: StackFit.expand,
         children: [
           Image.asset(
-            'assets/image.png',
+            'assets/image_background.png',
             fit: BoxFit.fill,
           ),
           Center(
