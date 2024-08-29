@@ -4,28 +4,36 @@ publish_to: "none"
 version: 0.1.0
 
 environment:
-   sdk: ^3.5.0
+  sdk: ^3.5.0
 
 dependencies:
-   dio: ^5.6.0
-   flutter:
-      sdk: flutter
-   http: ^1.2.2
-   model_viewer_plus: ^1.8.0
-   pedometer: ^4.0.2
-   provider: ^6.1.2
-   shared_preferences: ^2.3.2
-   syncfusion_flutter_gauges: ^26.2.10
-   url_launcher: ^6.1.5
+  dio: ^5.6.0
+  flutter:
+    sdk: flutter
+  http: ^1.2.2
+  model_viewer_plus: ^1.8.0
+  pedometer: ^4.0.2
+  provider: ^6.1.2
+  shared_preferences: ^2.3.2
+  syncfusion_flutter_gauges: ^26.2.10
+  url_launcher: ^6.1.5
 
 dev_dependencies:
-   flutter_test:
-      sdk: flutter
-   flutter_lints: ^4.0.0
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^4.0.0
+  flutter_launcher_icons: ^0.13.1
 
 flutter:
-   uses-material-design: true
+  uses-material-design: true
 
-   assets:
-      - assets/
-      - assets/toys/
+  assets:
+    - assets/
+    - assets/toys/
+
+flutter_launcher_icons:
+  android: "launcher_icon"
+  ios: "AppIcon"
+  image_path: "assets/icons/icon.png"
+  min_sdk_android: 21
+  remove_alpha_ios: true
