@@ -63,6 +63,16 @@ class ApiService {
     }
   }
 
+  Future<void> patchCollectedItems(String email, List<String> newItems) async {
+    try {
+      await _dio.patch('/users/$email/', data: {
+        'collected_items': newItems,
+      });
+    } catch (e) {
+      return;
+    }
+  }
+
   Future<Map<String, dynamic>?> signupUser(
       String name, String email, String petName, String selectedPet) async {
     try {
