@@ -41,8 +41,8 @@ class _HomePageState extends State<HomePage> {
       if (userInfo != null) {
         setState(() {
           _name = userInfo['pet_details']['pet_name'] ?? "loading";
-          _level = userInfo['level'] ?? "0";
-          _xp = userInfo['xp'] ?? "0";
+          _level = userInfo['level'] ?? 0;
+          _xp = userInfo['xp'] ?? 0;
 
           _collectedItems =
               List<String>.from(userInfo['collected_items'] ?? []);
@@ -70,92 +70,106 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Home'),
-        backgroundColor: const Color(0xFFFF9E6E),
-        centerTitle: true,
-      ),
-      body: SingleChildScrollView(
-        child: Column(
-          children: <Widget>[
-            SizedBox(
-              height: 60,
-              child: Center(
-                child: Text.rich(
-                  TextSpan(
-                    children: [
-                      TextSpan(
-                        text: 'Name: ',
-                        style: const TextStyle(
+      body: Stack(
+        fit: StackFit.expand,
+        children: [
+          Image.asset(
+            'assets/image_background.png',
+            fit: BoxFit.fill,
+          ),
+          Column(
+            children: <Widget>[
+              Expanded(
+                child: Stack(
+                  children: [
+                    Center(
+                      child: SizedBox(
+                        height: 300,
+                        child: const ModelViewer(
+                          src: 'assets/shiba.glb',
+                          alt: 'Shiba Inu model',
+                          ar: true,
+                          arModes: ['scene-viewer', 'webxr', 'quick-look'],
+                          autoRotate: true,
+                          disableZoom: false,
+                          cameraControls: true,
+                          iosSrc: 'assets/shiba.usdz',
+                        ),
+                      ),
+                    ),
+                    Positioned(
+                      top: 40,
+                      left: 20,
+                      child: Text(
+                        '$_xp XP',
+                        style: TextStyle(
+                          fontSize: 40,
                           fontWeight: FontWeight.bold,
-                          fontSize: 18,
+                          color: Colors.white,
                         ),
                       ),
-                      TextSpan(
-                        text: _name,
-                        style: const TextStyle(
-                          fontSize: 18,
+                    ),
+                    Positioned(
+                      top: 61,
+                      right: 20,
+                      child: Text(
+                        'Lvl $_level',
+                        style: TextStyle(
+                          fontSize: 19,
+                          fontWeight: FontWeight.w600,
+                          color: Colors.white,
                         ),
                       ),
-                      TextSpan(
-                        text: ' | Level: ',
-                        style: const TextStyle(
+                    ),
+                    Positioned(
+                      bottom: 10,
+                      left: 0,
+                      right: 0,
+                      child: Text(
+                        _name,
+                        textAlign: TextAlign.center,
+                        style: TextStyle(
+                          fontSize: 30,
                           fontWeight: FontWeight.bold,
-                          fontSize: 18,
+                          color: Colors.white,
                         ),
                       ),
-                      TextSpan(
-                        text: _level.toString(),
-                        style: const TextStyle(
-                          fontSize: 18,
-                        ),
-                      ),
-                      TextSpan(
-                        text: ' | XP: ',
-                        style: const TextStyle(
-                          fontWeight: FontWeight.bold,
-                          fontSize: 18,
-                        ),
-                      ),
-                      TextSpan(
-                        text: _xp.toString(),
-                        style: const TextStyle(
-                          fontSize: 18,
-                        ),
-                      ),
-                    ],
+                    ),
+                  ],
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: SizedBox(
+                  height: 120,
+                  child: ListView(
+                    scrollDirection: Axis.horizontal,
+                    children: _handleToySelection(),
                   ),
-                  textAlign: TextAlign.center,
                 ),
               ),
-            ),
-            const Card(
-              child: SizedBox(
-                height: 420,
-                child: ModelViewer(
-                  src: 'assets/shiba.glb',
-                  alt: 'Shiba Inu model',
-                  ar: true,
-                  arModes: ['scene-viewer', 'webxr', 'quick-look'],
-                  autoRotate: true,
-                  disableZoom: false,
-                  cameraControls: true,
-                  iosSrc: 'assets/shiba.usdz',
+              Padding(
+                padding: const EdgeInsets.symmetric(vertical: 16.0),
+                child: ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: Colors.green.shade600,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(30),
+                    ),
+                    padding: EdgeInsets.symmetric(horizontal: 50, vertical: 15),
+                  ),
+                  onPressed: () {
+                    // Button press logic here
+                  },
+                  child: Text(
+                    'Change Toy',
+                    style: TextStyle(fontSize: 18, color: Colors.white, t),
+                  ),
                 ),
               ),
-            ),
-            Padding(
-              padding: const EdgeInsets.all(8.0), 
-              child: SizedBox(
-                height: 120,
-                child: ListView(
-                  scrollDirection: Axis.horizontal,
-                  children: _handleToySelection(),
-                ),
-              ),
-            ),
-          ],
-        ),
+            ],
+          ),
+        ],
       ),
     );
   }
@@ -168,8 +182,8 @@ class _HomePageState extends State<HomePage> {
       String formattedKey = entries.key.replaceAll('_', ' ');
 
       return Container(
-        width: 100, 
-        padding: const EdgeInsets.all(8.0), 
+        width: 100,
+        padding: const EdgeInsets.all(8.0),
         child: Column(
           children: [
             GestureDetector(
@@ -197,10 +211,14 @@ class _HomePageState extends State<HomePage> {
             Expanded(
               child: Center(
                 child: FittedBox(
-                  fit: BoxFit.scaleDown, 
+                  fit: BoxFit.scaleDown,
                   child: Text(
                     formattedKey,
-                    style: const TextStyle(fontSize: 15),
+                    style: const TextStyle(
+                      fontSize: 15,
+                      color: Colors.white,
+                      fontWeight: FontWeight.bold,
+                    ),
                     textAlign: TextAlign.center,
                   ),
                 ),
