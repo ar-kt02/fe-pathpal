@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:pathpal/pages/signup_page.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../utils/api_service.dart';
 import 'main_screen.dart';
@@ -46,12 +47,16 @@ class _LoginPageState extends State<LoginPage> {
     );
   }
 
+  void _navigateToSignUpPage() {
+    Navigator.push(
+      context,
+      MaterialPageRoute(builder: (_) => const SignupPage()),
+    );
+  }
+
   void _errorMsg(String message) {
     ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(
-        content: Text(message),
-        backgroundColor: Colors.redAccent,
-      ),
+      SnackBar(content: Text(message)),
     );
   }
 
@@ -149,6 +154,10 @@ class _LoginPageState extends State<LoginPage> {
                       'Log in',
                       style: TextStyle(fontSize: 18),
                     ),
+                  ),
+                  TextButton(
+                    onPressed: _navigateToSignUpPage,
+                    child: const Text("Don't have an account? Sign up"),
                   ),
                 ],
               ),
