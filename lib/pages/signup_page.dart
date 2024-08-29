@@ -72,7 +72,7 @@ class _SignupPageState extends State<SignupPage> {
           _showErrorMsg('Signup failed. Please try again.');
         }
       } catch (e) {
-        _showErrorMsg('Error occured. Please try again.');
+        _showErrorMsg('Error occurred. Please try again.');
       } finally {
         setState(() {
           _isLoading = false;
@@ -133,7 +133,10 @@ class _SignupPageState extends State<SignupPage> {
           ),
           Text(
             formattedKey,
-            style: const TextStyle(fontSize: 15),
+            style: const TextStyle(
+              fontSize: 15,
+              color: Colors.white,
+            ),
           ),
         ],
       );
@@ -143,59 +146,180 @@ class _SignupPageState extends State<SignupPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Sign up'),
-        backgroundColor: const Color(0xFFFF9E6E),
-      ),
-      body: SingleChildScrollView(
-        padding: const EdgeInsets.all(16.0),
-        child: Form(
-          key: _formKey,
-          child: Column(
-            children: [
-              TextFormField(
-                controller: _nameController,
-                decoration: const InputDecoration(
-                  labelText: 'Name',
-                  border: OutlineInputBorder(),
-                ),
-                validator: _validateName,
-              ),
-              const SizedBox(height: 20),
-              TextFormField(
-                controller: _emailController,
-                decoration: const InputDecoration(
-                  labelText: 'Email',
-                  border: OutlineInputBorder(),
-                ),
-                validator: _validateEmail,
-                keyboardType: TextInputType.emailAddress,
-              ),
-              TextFormField(
-                controller: _petNameController,
-                decoration: const InputDecoration(
-                  labelText: 'Pet Name',
-                  border: OutlineInputBorder(),
-                ),
-                validator: _validatePetName,
-              ),
-              const Text('Select your pet:'),
-              SizedBox(
-                height: 120,
-                child: ListView(
-                  scrollDirection: Axis.horizontal,
-                  children: _handlePetSelection(),
-                ),
-              ),
-              ElevatedButton(
-                onPressed: _isLoading ? null : _signupUser,
-                child: _isLoading
-                    ? const CircularProgressIndicator()
-                    : const Text('Sign up'),
-              ),
-            ],
+      body: Stack(
+        fit: StackFit.expand,
+        children: [
+          Image.asset(
+            'assets/image_background.png',
+            fit: BoxFit.fill,
           ),
-        ),
+          Center(
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 25.0),
+              child: SingleChildScrollView(
+                child: Form(
+                  key: _formKey,
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Container(
+                        padding: const EdgeInsets.all(8.0),
+                        decoration: BoxDecoration(
+                          color: Colors.black.withOpacity(0.6),
+                          borderRadius: BorderRadius.circular(10),
+                        ),
+                        child: const Text(
+                          'Create Account',
+                          style: TextStyle(
+                            fontSize: 26,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.white,
+                            shadows: [
+                              Shadow(
+                                offset: Offset(2.0, 2.0),
+                                blurRadius: 3.0,
+                                color: Color.fromARGB(128, 0, 0, 0),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
+                      const SizedBox(height: 10),
+                      Container(
+                        padding: const EdgeInsets.all(8.0),
+                        decoration: BoxDecoration(
+                          color: Colors.black.withOpacity(0.6),
+                          borderRadius: BorderRadius.circular(10),
+                        ),
+                        child: const Text(
+                          'Sign up to get started',
+                          style: TextStyle(
+                            fontSize: 16,
+                            color: Colors.white70,
+                            shadows: [
+                              Shadow(
+                                offset: Offset(2.0, 2.0),
+                                blurRadius: 3.0,
+                                color: Color.fromARGB(128, 0, 0, 0),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
+                      const SizedBox(height: 40),
+                      TextFormField(
+                        controller: _nameController,
+                        decoration: InputDecoration(
+                          labelText: 'Name',
+                          labelStyle: const TextStyle(color: Colors.black),
+                          border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(10.0),
+                          ),
+                          filled: true,
+                          fillColor: Colors.white.withOpacity(0.8),
+                          focusedBorder: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(10.0),
+                            borderSide:
+                                const BorderSide(color: Color(0xFF78C850)),
+                          ),
+                        ),
+                        validator: _validateName,
+                      ),
+                      const SizedBox(height: 20),
+                      TextFormField(
+                        controller: _emailController,
+                        decoration: InputDecoration(
+                          labelText: 'Email',
+                          labelStyle: const TextStyle(color: Colors.black),
+                          border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(10.0),
+                          ),
+                          filled: true,
+                          fillColor: Colors.white.withOpacity(0.8),
+                          focusedBorder: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(10.0),
+                            borderSide:
+                                const BorderSide(color: Color(0xFF78C850)),
+                          ),
+                        ),
+                        validator: _validateEmail,
+                        keyboardType: TextInputType.emailAddress,
+                      ),
+                      const SizedBox(height: 20),
+                      TextFormField(
+                        controller: _petNameController,
+                        decoration: InputDecoration(
+                          labelText: 'Pet Name',
+                          labelStyle: const TextStyle(color: Colors.black),
+                          border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(10.0),
+                          ),
+                          filled: true,
+                          fillColor: Colors.white.withOpacity(0.8),
+                          focusedBorder: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(10.0),
+                            borderSide:
+                                const BorderSide(color: Color(0xFF78C850)),
+                          ),
+                        ),
+                        validator: _validatePetName,
+                      ),
+                      const SizedBox(height: 30),
+                      const Text(
+                        'Select your pet:',
+                        style: TextStyle(
+                          fontSize: 18,
+                          color: Colors.white,
+                        ),
+                      ),
+                      const SizedBox(height: 10),
+                      SizedBox(
+                        height: 120,
+                        child: ListView(
+                          scrollDirection: Axis.horizontal,
+                          children: _handlePetSelection(),
+                        ),
+                      ),
+                      const SizedBox(height: 30),
+                      Center(
+                        child: SizedBox(
+                          width: double.infinity,
+                          child: ElevatedButton(
+                            onPressed: _isLoading ? null : _signupUser,
+                            style: ElevatedButton.styleFrom(
+                              padding: const EdgeInsets.symmetric(vertical: 15),
+                              backgroundColor: const Color(0xFF78C850),
+                              foregroundColor: Colors.white,
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(10.0),
+                              ),
+                            ),
+                            child: _isLoading
+                                ? const CircularProgressIndicator()
+                                : const Text(
+                                    'Sign up',
+                                    style: TextStyle(fontSize: 18),
+                                  ),
+                          ),
+                        ),
+                      ),
+                      const SizedBox(height: 20),
+                      TextButton(
+                        onPressed: () {
+                          Navigator.pop(context);
+                        },
+                        child: const Text(
+                          "Already have an account? Log in",
+                          
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+            ),
+          ),
+        ],
       ),
     );
   }
