@@ -165,36 +165,50 @@ class _HomePageState extends State<HomePage> {
                 padding: const EdgeInsets.all(8.0),
                 child: SizedBox(
                   height: 120,
-                  child: ListView(
-                    scrollDirection: Axis.horizontal,
-                    children: _handleToySelection(),
-                  ),
+                  child: _collectedItems.isEmpty
+                      ? const Center(
+                          child: Text(
+                            "You currently have no accessories available.",
+                            style: TextStyle(
+                              fontSize: 13,
+                              color: Colors.white,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                        )
+                      : ListView(
+                          scrollDirection: Axis.horizontal,
+                          children: _handleToySelection(),
+                        ),
                 ),
               ),
-              Padding(
-                padding: const EdgeInsets.symmetric(vertical: 16.0),
-                child: ElevatedButton(
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: _selectToyInput == _selectedToy
-                        ? Colors.grey
-                        : Colors.green.shade600,
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(30),
+              if (_collectedItems.isNotEmpty)
+                Padding(
+                  padding: const EdgeInsets.symmetric(vertical: 16.0),
+                  child: ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: _selectToyInput == _selectedToy
+                          ? Colors.grey
+                          : Colors.green.shade600,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(30),
+                      ),
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 50, vertical: 15),
                     ),
-                    padding: const EdgeInsets.symmetric(
-                        horizontal: 50, vertical: 15),
-                  ),
-                  onPressed:
-                      _selectToyInput == _selectedToy ? null : _changeToy,
-                  child: Text(
-                    _selectToyInput == _selectedToy ? 'Equipped' : 'Change Toy',
-                    style: const TextStyle(
-                      fontSize: 18,
-                      color: Colors.white,
+                    onPressed:
+                        _selectToyInput == _selectedToy ? null : _changeToy,
+                    child: Text(
+                      _selectToyInput == _selectedToy
+                          ? 'Equipped'
+                          : 'Change Toy',
+                      style: const TextStyle(
+                        fontSize: 18,
+                        color: Colors.white,
+                      ),
                     ),
                   ),
                 ),
-              ),
             ],
           ),
         ],
