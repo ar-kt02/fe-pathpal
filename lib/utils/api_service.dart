@@ -41,9 +41,11 @@ class ApiService {
     }
   }
 
-  Future<void> patchUserXp(String email, int xpIncrease) async {
+  Future<void> patchUserXpAndLevel(
+      String email, int newXp, int newLevel) async {
     try {
-      await _dio.patch('/users/$email/', data: {'xp': xpIncrease});
+      await _dio
+          .patch('/users/$email/', data: {'xp': newXp, 'level': newLevel});
     } catch (e) {
       return;
     }
@@ -59,5 +61,25 @@ class ApiService {
     } catch (e) {
       return;
     }
+  }
+
+  Future<Map<String, dynamic>?> signupUser(
+      String name, String email, String petName, String selectedPet) async {
+    try {
+      final response = await _dio.post('/users/', data: {
+        'name': name,
+        'email': email,
+        'pet_details': {
+          'pet_name': petName,
+          'selected_pet': selectedPet,
+        },
+      });
+      if (response.statusCode == 201) {
+        return response.data;
+      }
+    } catch (e) {
+      return null;
+    }
+    return null;
   }
 }
